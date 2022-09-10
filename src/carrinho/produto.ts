@@ -1,8 +1,11 @@
 export enum Type {
-        CAMISA,
-        BERMUDA,
-        CALCA
-    }
+    CAMISA,
+    BERMUDA,
+    CALCA
+}
+    
+
+ 
 
 
 

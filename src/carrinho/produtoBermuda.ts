@@ -1,17 +1,18 @@
 import { Type } from "./produto";
 
-export default class Bermuda implements Type {
+export default class Bermuda{
     private tamanho:Number
     private cor:String
     private quantidade: Number
     private id: Number
-
-    constructor(tamanho:Number, cor:String, quantidade:Number, id:Number) {
+    private valor: Number
+    
+    constructor(tamanho:Number, cor:String, quantidade:Number, id:Number, valor: Number) {
         this.tamanho = tamanho
         this.cor = cor
         this.quantidade = quantidade
         this.id = id
-
+        this.valor = valor
     }
 
     public type(): Type {
