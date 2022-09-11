@@ -1,3 +1,4 @@
+import ConcreteObserver from "./concreteObserver"
 import Observer from "./observers"
 import { Subject } from "./subject"
 
@@ -34,7 +35,7 @@ export default class ConcreteSubject implements Subject{
     }
     public notify(msg: String):void {
          this.observers.forEach((observer: Observer)=> {
-            observer.notify(msg)
+            observer.publish(msg)
          })   
 
         
