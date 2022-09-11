@@ -1,3 +1,4 @@
 export default interface Observer {
-    update(): void
+    
+    publish(msg:String): void
 }

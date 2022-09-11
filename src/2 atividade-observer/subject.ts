@@ -6,5 +6,5 @@ export interface Subject {
 
     detach(observer: Observer): void //separar
     
-    notify(): void //notificar
+    notify(msg: String): void //notificar
 }
