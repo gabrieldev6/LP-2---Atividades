@@ -1,14 +1,11 @@
-import { Type } from "./produto"
-import Bermuda from "./produtoBermuda"
-import Calca from "./produtoCalca"
-import Camisa from "./produtoCamisa"
+import { Produto } from "./produto"
 
 export default class ItensCarrinho {
     private quantidade_total: Number
     private valor_total: Number
-    private tipoProduto: Type
+    private tipoProduto: Produto
     
-    constructor(quantidade_total: Number, valor_total:Number, tipoProduto: Type) {
+    constructor(quantidade_total: Number, valor_total:Number, tipoProduto: Produto) {
         this.quantidade_total = quantidade_total
         this.valor_total = valor_total
         this.tipoProduto = tipoProduto
@@ -21,7 +18,7 @@ export default class ItensCarrinho {
         return this.valor_total
     }
     
-    TypeProduto(): Type {
+    TypeProduto(): Produto {
         return this.tipoProduto
         
     }

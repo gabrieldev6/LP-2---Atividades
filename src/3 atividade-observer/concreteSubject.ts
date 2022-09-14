@@ -37,7 +37,7 @@ export default class ConcreteSubject implements Subject{
          this.observers.forEach((observer: Observer)=> {
             observer.publish(msg)
          })   
-
+         //vai percorrer a lista enviando a mensagem para os observers da lista
         
     }
 
