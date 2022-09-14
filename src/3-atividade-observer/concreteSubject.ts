@@ -1,4 +1,3 @@
-import ConcreteObserver from "./concreteObserver"
 import Observer from "./observers"
 import { Subject } from "./subject"
 

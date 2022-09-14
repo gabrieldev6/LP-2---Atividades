@@ -1,7 +1,7 @@
 import ConcreteObserver from "./concreteObserver";
 import ConcreteSubject from "./concreteSubject";
 
-function main() {
+export function main() {
     let lp2 = new ConcreteSubject("Lp2")
     let programing = new ConcreteSubject("Programing")
 
@@ -12,7 +12,7 @@ function main() {
     lp2.attach(lara)
 
     lp2.notify("hey hi")
-
+    
 }
 
 main()
