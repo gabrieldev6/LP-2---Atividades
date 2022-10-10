@@ -1,3 +1,3 @@
+import { main } from "./src/4-atividade-ddd/main";
 
-
-console.log("deu certo")
+main()

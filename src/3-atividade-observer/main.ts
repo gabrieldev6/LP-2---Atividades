@@ -14,5 +14,3 @@ export function main() {
     lp2.notify("hey hi")
     
 }
-
-main()

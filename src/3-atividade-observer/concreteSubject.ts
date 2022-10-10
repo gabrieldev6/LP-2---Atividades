@@ -3,14 +3,17 @@ import { Subject } from "./subject"
 
 export default class ConcreteSubject implements Subject{
     private name: String
-    public observers: Array<Observer>
+    public observers: Array<Observer> = new Array()
 
     constructor(name: String) {
-        this.name = name
+        this.name = name        
     }
 
     public getName(): String {
         return this.name
+    }
+    public getObservers(): Array<Observer>{
+        return this.observers
     }
 
     public attach(observer: Observer) { //anexar
