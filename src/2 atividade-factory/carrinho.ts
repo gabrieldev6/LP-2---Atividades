@@ -27,16 +27,6 @@ export default class Carrinho implements CarrinhoFactory{
         
         return new ItensCarrinho(quantidade_total, valor_total, new Calca(tamanho, cor, quantidade, id, tipo, valor))
     }
-    // public create ( tamanho:Number,
-    //                 cor:String,
-    //                 quantidade:Number,
-    //                 id:Number, 
-    //                 valor: Number,
-    //                 quantidade_total: Number, 
-    //                 valor_total:Number): ItemCarrinho {
-
-    //     return new ItensCarrinho(quantidade_total, valor_total, new Bermuda(tamanho, cor, quantidade, id, valor))
-    // }
 
 
     //gets

@@ -6,6 +6,7 @@ export default class CardId extends BaseId{
     private constructor(UUID: any) {
         super(UUID)
     }
+    
     public CardId(UUID?: any) {
         if(UUID==null) {
             return new CardId(uuidv4())

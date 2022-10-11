@@ -1,6 +1,7 @@
 import ValueObject from "../valueObject";
 import {v4 as uuidv4} from "uuid";
-import objectHash from "object-hash";
+// import objectHash from "object-hash";
+
 export default abstract class BaseId implements ValueObject {
     private readonly UUID: any = uuidv4()
 
@@ -11,7 +12,7 @@ export default abstract class BaseId implements ValueObject {
     public getValue() {
         return this.UUID.toString()
     }
-    //TODO: resolver esse problema
+    
     public equals(o: Object) {
         if(this == o) {
             return true
@@ -21,7 +22,9 @@ export default abstract class BaseId implements ValueObject {
         }
         return this.UUID.equals(this.UUID)
     }
-    public hashCode(): any {
-        return objectHash(this.UUID)
-    }
+
+
+    // public hashCode() {
+    //     return objectHash(this.UUID)
+    // }
 }

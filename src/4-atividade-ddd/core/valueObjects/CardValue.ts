@@ -15,9 +15,9 @@ export enum CardValue {
 }
 let value:number
 
-function cardValue(value:number) :void{
+export function cardValue(value:number) :void{
     this.value = value
 }
-function getValue() {
+export function getValue() {
     return value
 }

@@ -15,11 +15,11 @@ export default class AcessConfig implements ValueObject {
     }
     
     //TODO: testar se a funcao ta funcionando ok
-    public AcessConfig(minPlayer: number, maxPlayer: number, visibility: boolean=true) {
+    static AcessConfig(minPlayer: number, maxPlayer: number, visibility: boolean=true) {
         if(minPlayer < 4) {
             throw new Error("min players, can't be less than 4")
         }
-        if(minPlayer < 13) {
+        if(minPlayer > 13) {
             throw new Error("min players, can't be greater than + 13")
         }
         if(maxPlayer > 13) {
@@ -45,7 +45,11 @@ export default class AcessConfig implements ValueObject {
     public getVisibility() {
         return this.visibility
     }
-
+    
+    
     //link: https://github.com/ifce-prof-thiago/president-and-the-asshole/blob/main/core/src/main/java/president/domain/valueobjects/AccessConfig.java
 
+}
+export enum visibility {
+    PUBLIC, PRIVATE
 }

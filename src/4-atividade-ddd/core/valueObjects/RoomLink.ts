@@ -8,8 +8,7 @@ export default class RoomLink implements ValueObject {
         this.UUID = UUID
     }
 
-    public RoomLink () {
-
+    static RoomLink () {
         return new RoomLink(uuidv4())
     }
 
