@@ -1,4 +1,6 @@
-export enum CardValue {
+import ValueObject from "./valueObject"
+
+export enum Enum {
     ACE=12,
     TWO=13,
     THREE=1,
@@ -13,11 +15,20 @@ export enum CardValue {
     QUEEN=10,
     KING=11,
 }
-let value:number
 
-export function cardValue(value:number) :void{
-    this.value = value
-}
-export function getValue() {
-    return value
+export class CardValue implements ValueObject {
+    private value: Enum
+
+
+
+
+    CardValue(value: number) {
+        this.value = value
+    }
+    public getValue() {
+        return this.value
+    }
+    public compare(c: CardValue) {
+        return this.getValue() - c.getValue() 
+    }
 }

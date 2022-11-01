@@ -2,39 +2,43 @@ import ValueObject from "./valueObject"
 
 
 export default class AcessConfig implements ValueObject {
-    private readonly minPlayer:number //readonly == final
+    private static readonly  MIN_PLAYERS = 4
     private readonly maxPlayer:number
     private readonly timeOfNextPlayer:number
-    private readonly visibility: boolean
+    private readonly visibility: Visibility
     
-    private constructor(minPlayer:number, maxPlayer:number, timeOfNextPlayer:number, visibility: boolean) {
-        this.minPlayer = minPlayer
+    private constructor( maxPlayer:number, timeOfNextPlayer:number, visibility: Visibility) {
+
         this.maxPlayer = maxPlayer
         this.timeOfNextPlayer = timeOfNextPlayer
         this.visibility = visibility
     }
     
-    //TODO: testar se a funcao ta funcionando ok
-    static AcessConfig(minPlayer: number, maxPlayer: number, visibility: boolean=true) {
-        if(minPlayer < 4) {
-            throw new Error("min players, can't be less than 4")
-        }
-        if(minPlayer > 13) {
-            throw new Error("min players, can't be greater than + 13")
+    // public static AcessConfig() {
+
+    // }
+
+
+
+
+    static AcessConfig(maxPlayer: number, visibility: Visibility) {
+        if(maxPlayer < AcessConfig.MIN_PLAYERS) {
+            throw new Error("mas players, can't be less than four")
         }
         if(maxPlayer > 13) {
-            throw new Error(`max players' can't be less than 13`)
+            throw new Error("max players, can't be greater than 13");
+            
         }
-        if(maxPlayer < minPlayer){
-            throw new Error(`max players can't be less than ${minPlayer}`)
+        if(visibility == Visibility.PRIVATE) {
+            return new AcessConfig(maxPlayer, 15, Visibility.PRIVATE)
         }
-
-
-        return new AcessConfig(minPlayer, maxPlayer, 15, visibility)
+        if(visibility == Visibility.PUBLIC) {
+            return new AcessConfig(maxPlayer, 15, Visibility.PUBLIC)
+        }
     }
 
     public getMinPlayers() {
-        return this.minPlayer
+        return AcessConfig.MIN_PLAYERS
     }
     public getMaxPlayer() {
         return this.maxPlayer
@@ -50,6 +54,6 @@ export default class AcessConfig implements ValueObject {
     //link: https://github.com/ifce-prof-thiago/president-and-the-asshole/blob/main/core/src/main/java/president/domain/valueobjects/AccessConfig.java
 
 }
-export enum visibility {
+export enum Visibility {
     PUBLIC, PRIVATE
 }
