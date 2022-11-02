@@ -3,12 +3,12 @@ import CardId from "../valueObjects/identifier/CardId"
 import { CardValue } from "../valueObjects/CardValue"
 
 
-export default class Card {
+export default class Card{
     private readonly cardId: CardId
     private readonly cardValue: CardValue
     private readonly suit: Suit
 
-    private constructor(cardId: CardId, cardValue: CardValue, suit: Suit) {
+    private constructor(cardId: CardId, cardValue: CardValue, suit: Suit){
         this.cardId = cardId
         this.cardValue = cardValue
         this.suit = suit
