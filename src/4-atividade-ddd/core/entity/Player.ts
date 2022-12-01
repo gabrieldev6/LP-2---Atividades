@@ -1,15 +1,13 @@
-import * as Collections from "typescript-collections";
-
 import PlayerId from "../valueObjects/identifier/PlayerId";
 import Card from "./Card";
 
-export default class Player {
+export class Player {
     private playerId: PlayerId
     private nickname: String
     private readonly cards: Array<Card>
-    private choiceCard: Card
+    private choiceCard: Card | null
 
-    private constructor(playerId: PlayerId, nickname: String, cards: Array<Card>, choiceCard: Card) {
+    private constructor(playerId: PlayerId, nickname: String, cards: Array<Card>, choiceCard: Card | null) {
         this.playerId = playerId
         this.nickname = nickname
         this.cards = cards
@@ -17,7 +15,7 @@ export default class Player {
     }
 
     public static Player(nickname: String) {
-        return new Player(Player.Player(), nickname, new Array<Card>() )
+        return new Player(PlayerId.playerId(), nickname, new Array<Card>(), null)
     }
 
     public setChoiceCard(card: Card) {
@@ -39,7 +37,12 @@ export default class Player {
     }
 
     public comprareTo(o: Player) {
-        return o.choiceCard.getCardValue().getValue() - this.choiceCard.getCardValue().getValue()
+        
+        if(o.choiceCard !== null && this.choiceCard !== null) {
+            return o.choiceCard.getCardValue().getValue() - this.choiceCard.getCardValue().getValue()
+        }
+
+        
     }
 
 }

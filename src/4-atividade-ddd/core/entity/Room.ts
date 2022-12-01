@@ -1,38 +1,80 @@
 import RoomId from "../valueObjects/identifier/RoomId";
-import PlayerId from "../valueObjects/identifier/PlayerId";
+import Card from "./Card";
 import RoomLink from "../valueObjects/RoomLink"; 
 import AcessConfig from "../valueObjects/AcessConfig"
+import { Player } from "./Player";
+import PlayerId from "../valueObjects/identifier/PlayerId";
+import { CardValue, EnumCardValue } from "../valueObjects/CardValue";
 
-export default class Room {
+import * as Collections from 'typescript-collections';
 
+export class Room {
+    private readonly N_DECKS: number = 2
     private readonly roomId: RoomId
-    private ownerId: PlayerId
+    private owner: Player
     private readonly roomLink: RoomLink
     private acessConfig: AcessConfig
-    private players: Array<PlayerId>
+    private players: Array<Player>
+    private playersToChoice: Array<PlayerId>
+    private cardsToChoice: Array<Card>
 
-    private constructor(roomId: RoomId, ownerId: PlayerId, roomLink: RoomLink, acessConfig: AcessConfig, players: Array<PlayerId>) {
+    private cardsToDeal: Array<Card>
+    private status: status
+
+    private constructor(roomId: RoomId, owner: Player, roomLink: RoomLink, acessConfig: AcessConfig, players: Array<Player>) {
         this.roomId = roomId
-        this.ownerId = ownerId
+        this.owner = owner
         this.roomLink = roomLink
         this.acessConfig = acessConfig
         this.players = players
+
+        this.cardsToChoice = new Array<Card>()
+        this.cardsToDeal = new Array<Card>()
+
+        initializePlayer(players)
+
+        this.status = Status.WAITING
+    }
+    //TODO: resolver o problema de Deck e vim aqui para resolver o restante do problema
+    public dealCards(): void {
+        var qtyCardsOfRemove = (this.N_DECKS * 52) % this.players.length
+
+        for(let i=0; i< this.N_DECKS; i++){
+            for(let card in Deck) {
+                if(card.getCardValue().equals(EnumCardValue.THREE) && qtyCardsOfRemove > 0) {
+                    qtyCardsOfRemove--
+                    continue
+                }
+                this.cardsToDeal.push(card)
+            }
+        }
+        //TODO:resolver o problema do sort
+        Array.sort(()=> {
+            Math.random() -0.5 *2
+        })
+        var currentPlayer = 0
+        //TODO: resolver o problema do get
+        for(var card in this.cardsToDeal) {
+            this.players.get(currentPlayer).addPlayer(card)
+            currentPlayer = (currentPlayer + 1) % this.players.length
+        }
     }
 
-    static Room(ownerId: PlayerId, acessConfig: AcessConfig) {
+
+    static Room(owner: Player, acessConfig: AcessConfig) {
         let roomId = RoomId.RoomId()
         let roomLink = RoomLink.RoomLink()
         let players = new Array<PlayerId>()
-        players.push(ownerId)
+        players.push(owner)
 
-        return new Room(roomId, ownerId, roomLink, acessConfig, players)
+        return new Room(roomId, owner, roomLink, acessConfig, players)
     }
 
-    public addPlayer(playerId:PlayerId) {
+    public addPlayer(player:Player) {
         if(this.players.length >= this.acessConfig.getMinPlayers()) {
             throw new Error("this room is full")
         }
-        this.players.push(playerId)
+        this.players.push(player)
     }
 
 
@@ -52,11 +94,11 @@ export default class Room {
         return this.players
     }
 }
-export enum status {
-    IN_LOBBY,
-    SORTING,
-    READY,
-    ROUND,
+export enum Status {
+    WAITING,
+    IN_SORTING,
+    THROWING_CARDS,
+    IN_GAME,
     ROUND_FINISHED,
-    FINISHED
+    GAME_FINISHED
 }

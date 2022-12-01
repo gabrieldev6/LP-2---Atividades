@@ -7,7 +7,7 @@ export default class CardId extends BaseId{
         super(UUID)
     }
     
-    public CardId(UUID?: any) {
+    public static CardId(UUID?: any) {
         if(UUID==null) {
             return new CardId(uuidv4())
         } else {

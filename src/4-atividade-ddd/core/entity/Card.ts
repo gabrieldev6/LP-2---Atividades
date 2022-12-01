@@ -14,9 +14,10 @@ export default class Card{
         this.suit = suit
     }
 
-    public Card(cardValue: CardValue, suit: Suit) {
-        
-        return new Card(this.cardId.CardId(), cardValue, suit)
+    public static Card(cardValue: CardValue, suit: Suit) {
+        let cardid = CardId.CardId()
+
+        return new Card(cardid , cardValue, suit)
         // a funcao vai receber o nuero da carta e o brasao 'suit'
         // cria um novo objeto com UUID aleatorio, o valor e o brasao da carta
     }

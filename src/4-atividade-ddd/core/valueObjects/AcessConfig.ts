@@ -14,13 +14,6 @@ export default class AcessConfig implements ValueObject {
         this.visibility = visibility
     }
     
-    // public static AcessConfig() {
-
-    // }
-
-
-
-
     static AcessConfig(maxPlayer: number, visibility: Visibility) {
         if(maxPlayer < AcessConfig.MIN_PLAYERS) {
             throw new Error("mas players, can't be less than four")

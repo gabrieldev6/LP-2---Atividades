@@ -12,7 +12,7 @@ export default class RoomLink implements ValueObject {
         return new RoomLink(uuidv4())
     }
 
-    public getValue() {
-        return this.UUID
+    public getValue(): String {
+        return this.UUID.toString();
     }
 }

@@ -1,6 +1,6 @@
 import ValueObject from "./valueObject"
 
-export enum Enum {
+export enum EnumCardValue {
     ACE=12,
     TWO=13,
     THREE=1,
@@ -17,12 +17,12 @@ export enum Enum {
 }
 
 export class CardValue implements ValueObject {
-    private value: Enum
+    private value: EnumCardValue
 
 
 
 
-    CardValue(value: number) {
+    constructor(value: number) {
         this.value = value
     }
     public getValue() {

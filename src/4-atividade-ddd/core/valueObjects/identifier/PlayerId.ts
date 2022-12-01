@@ -9,7 +9,7 @@ export default class PlayerId extends BaseId {
     // static create():PlayerId {
 
     // }
-    static playerId(UUID?: any) {
+    static playerId(UUID?: String) {
 
         if(UUID==null || UUID ==undefined) {
             return new PlayerId(uuidv4())
