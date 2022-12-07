@@ -4,7 +4,7 @@ import AcessConfig, { Visibility } from "../core/valueObjects/AcessConfig"
 
 export class CreateRoomIn {
     nickName: string
-    visibility: Visibility 
+    visibility: Visibility
     maxPlayers: number
 
     private constructor(nickname:string, visibility, maxPlayers:number){

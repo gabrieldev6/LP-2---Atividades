@@ -5,7 +5,7 @@ import { CardValue } from "../valueObjects/CardValue"
 
 export default class Card{
     private readonly cardId: CardId
-    private readonly cardValue: CardValue
+    private readonly cardValue: CardValue 
     private readonly suit: Suit
 
     private constructor(cardId: CardId, cardValue: CardValue, suit: Suit){
@@ -14,7 +14,7 @@ export default class Card{
         this.suit = suit
     }
 
-    public static Card(cardValue: CardValue, suit: Suit) {
+    public static Card(cardValue: CardValue , suit: Suit) {
         let cardid = CardId.CardId()
 
         return new Card(cardid , cardValue, suit)
@@ -25,10 +25,20 @@ export default class Card{
     public getCardId(): CardId {
         return this.cardId
     }
-    public getCardValue(): CardValue {
+    public getCardValue(){
         return this.cardValue
     }
     public getSuit(): Suit {
         return this.suit
+    }
+
+    public toString(){
+        return this.cardValue + "of" + this.suit
+    }
+
+    public compareTo(o: Card){
+         
+        return o.getCardValue().getValue() - this.getCardValue().getValue()
+            
     }
 }

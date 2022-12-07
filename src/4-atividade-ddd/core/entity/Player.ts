@@ -36,10 +36,11 @@ export class Player {
         return this.choiceCard
     }
 
-    public comprareTo(o: Player) {
+    public compareTo(player: Player){
         
-        if(o.choiceCard !== null && this.choiceCard !== null) {
-            return o.choiceCard.getCardValue().getValue() - this.choiceCard.getCardValue().getValue()
+        if(player.choiceCard !== null && this.choiceCard !== null) {
+            return this.choiceCard.compareTo(player.choiceCard)
+            
         }
 
         

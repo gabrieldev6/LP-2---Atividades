@@ -5,8 +5,10 @@ import AcessConfig from "../valueObjects/AcessConfig"
 import { Player } from "./Player";
 import PlayerId from "../valueObjects/identifier/PlayerId";
 import { CardValue, EnumCardValue } from "../valueObjects/CardValue";
-
 import * as Collections from 'typescript-collections';
+import Deck from "../valueObjects/Deck";
+import { Suit } from "../valueObjects/Suit";
+import { compareToEquals } from "typescript-collections/dist/lib/util";
 
 export class Room {
     private readonly N_DECKS: number = 2
@@ -19,7 +21,7 @@ export class Room {
     private cardsToChoice: Array<Card>
 
     private cardsToDeal: Array<Card>
-    private status: status
+    private status: Status
 
     private constructor(roomId: RoomId, owner: Player, roomLink: RoomLink, acessConfig: AcessConfig, players: Array<Player>) {
         this.roomId = roomId
@@ -31,27 +33,25 @@ export class Room {
         this.cardsToChoice = new Array<Card>()
         this.cardsToDeal = new Array<Card>()
 
-        initializePlayer(players)
+        this.initializePlayers(players)
 
         this.status = Status.WAITING
     }
     //TODO: resolver o problema de Deck e vim aqui para resolver o restante do problema
     public dealCards(): void {
         var qtyCardsOfRemove = (this.N_DECKS * 52) % this.players.length
-
+        
         for(let i=0; i< this.N_DECKS; i++){
             for(let card in Deck) {
                 if(card.getCardValue().equals(EnumCardValue.THREE) && qtyCardsOfRemove > 0) {
                     qtyCardsOfRemove--
-                    continue
+                    continue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                 }
                 this.cardsToDeal.push(card)
             }
         }
         //TODO:resolver o problema do sort
-        Array.sort(()=> {
-            Math.random() -0.5 *2
-        })
+        Array.prototype.sort(()=> Math.random() -0.5 *2)
         var currentPlayer = 0
         //TODO: resolver o problema do get
         for(var card in this.cardsToDeal) {
@@ -60,15 +60,66 @@ export class Room {
         }
     }
 
+    private initializePlayers(players: Array<Player>){
+        this.playersToChoice = new Array<PlayerId>
+            players.map(p => {
+                p.getPlayerId()
+            }
+        )
+
+    }
+
+    private toSorting(): void{
+        if(this.status != Status.WAITING) {
+            throw new ErrorEvent("Room is not waiting")
+        }
+        this.shuffleCardsToChoice()
+        this.status = Status.IN_SORTING
+    }
+
+    //TODO: concertar cardValue
+    private shuffleCardsToChoice(): void{
+        if(this.players.length < this.acessConfig.getMinPlayers()) {
+            throw new Error("'min players' can't be less than four!")
+        }
+        for(let cardValue in CardValue.arguments) {
+            this.cardsToChoice.push(Card.Card(cardValue, Suit.CLUBS))
+        }
+        this.cardsToChoice.sort(()=> Math.random() -0.5 *2 )
+
+    }
+
+    
 
     static Room(owner: Player, acessConfig: AcessConfig) {
         let roomId = RoomId.RoomId()
         let roomLink = RoomLink.RoomLink()
-        let players = new Array<PlayerId>()
+        let players = new Array<Player>()
         players.push(owner)
 
         return new Room(roomId, owner, roomLink, acessConfig, players)
     }
+
+    public sortPlayers(): void{
+        if(this.playersToChoice) {
+            this.players.sort(()=> Math.random() -0.5 * 2)
+            this.ToThorwing()
+        }
+    }
+
+    public ToThorwing(): void{
+        if(this.status  != Status.IN_SORTING && this.status != Status.ROUND_FINISHED) {
+            throw new Error("Room is not in sorting or round finished");
+        }
+    }
+
+    public toInGame(){
+        if(this.status != Status.THROWING_CARDS) {
+            throw new Error("Room is not throwing cards")
+        }
+        this.status = Status.IN_GAME;
+    }
+
 
     public addPlayer(player:Player) {
         if(this.players.length >= this.acessConfig.getMinPlayers()) {
@@ -82,7 +133,7 @@ export class Room {
         return this.roomId
     }
     public getOwnerId() {
-        return this.ownerId
+        return this.owner
     }
     public getRoomLink() {
         return this.roomLink

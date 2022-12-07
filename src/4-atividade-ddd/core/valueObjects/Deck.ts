@@ -13,10 +13,10 @@ export default class Deck implements ValueObject{
             for(let suit in Suit) {
                 this.cards[card.ordinal() + suit.ordinal() * 13] = Card.Card(card, suit)
             }
-        }
-
-        
+        }   
     }
+
+    
     public static Deck(){
         return new Deck()
     }

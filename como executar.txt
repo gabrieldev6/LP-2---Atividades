@@ -1,0 +1,8 @@
+vai no terminal e coloca 'ts-node index.ts'
+
+github subir alterações
+
+git status
+git add .
+git commit -m "commit moabe"
+git push origin main
