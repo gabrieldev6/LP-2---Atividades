@@ -17,14 +17,14 @@ export default abstract class BaseId implements ValueObject {
         if(this == o) {
             return true
         }
-        if(o ==null ) { //this.getClass() != o.getClass()
+        if(o ==null) { //this.getClass() != o.getClass()
             return false
         }
         return this.UUID.equals(this.UUID)
     }
 
 
-    // public hashCode() {
-    //     return objectHash(this.UUID)
-    // }
+    public hashCode() {
+        return uuidv4(this.UUID)
+    }
 }

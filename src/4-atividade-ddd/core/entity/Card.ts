@@ -2,8 +2,7 @@ import { Suit } from "../valueObjects/Suit"
 import CardId from "../valueObjects/identifier/CardId"
 import { CardValue } from "../valueObjects/CardValue"
 
-
-export default class Card{
+export default class Card {
     private readonly cardId: CardId
     private readonly cardValue: CardValue 
     private readonly suit: Suit

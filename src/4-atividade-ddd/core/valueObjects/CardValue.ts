@@ -1,6 +1,6 @@
 import ValueObject from "./valueObject"
 
-export enum EnumCardValue {
+export enum EnumCardValue{
     ACE=12,
     TWO=13,
     THREE=1,
@@ -30,5 +30,11 @@ export class CardValue implements ValueObject {
     }
     public compare(c: CardValue) {
         return this.getValue() - c.getValue() 
+    }
+    public equals(o:Object){
+        if(this == o) return true
+        if(o == null ) return false
+
+
     }
 }
