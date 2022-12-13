@@ -1,6 +1,6 @@
-import { Player } from "../core/entity/Player"
-import { Room } from "../core/entity/Room"
-import AcessConfig, { Visibility } from "../core/valueObjects/AcessConfig"
+import { Player } from "../../../core/entity/Player"
+import { Room } from "../../../core/entity/Room"
+import AcessConfig, { Visibility } from "../../../core/valueObjects/AcessConfig"
 
 export class CreateRoomIn {
     nickName: string

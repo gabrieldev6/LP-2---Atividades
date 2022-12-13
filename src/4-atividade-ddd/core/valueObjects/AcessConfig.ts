@@ -28,6 +28,7 @@ export default class AcessConfig implements ValueObject {
         if(visibility == Visibility.PUBLIC) {
             return new AcessConfig(maxPlayer, 15, Visibility.PUBLIC)
         }
+        return new AcessConfig(maxPlayer, 15, Visibility.PUBLIC)
     }
 
     public getMinPlayers() {
