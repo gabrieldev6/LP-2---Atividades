@@ -1,3 +1,4 @@
 A Api necessita do Yarn
 
 assim entrando em Index.ts e colocando yarn dev
+    
